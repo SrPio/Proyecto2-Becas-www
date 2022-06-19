@@ -12,8 +12,8 @@ function MyStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="BecasList" component={BecasList} />
-      <Stack.Screen name="BecasInfo" component={BecasInfo} />
       <Stack.Screen name="CrearBecas" component={CrearBecas} />
+      <Stack.Screen name="BecasInfo" component={BecasInfo} />
     </Stack.Navigator>
   )
 }
