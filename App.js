@@ -6,6 +6,7 @@ import BecasList from './components/BecasList';
 import BecasInfo from './components/BecasInfo';
 import CrearBecas from './components/CrearBecas';
 import ActualizarBeca from './components/ActualizarBeca';
+import BecasPopulares from './components/BecasPopulares';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ function MyStack() {
       <Stack.Screen name="CrearBecas" component={CrearBecas} options={{ title: "Crear Beca" }} />
       <Stack.Screen name="BecasInfo" component={BecasInfo} options={{ title: "Información de la Beca" }} />
       <Stack.Screen name="ActualizarBeca" component={ActualizarBeca} options={{ title: "Editar Beca" }} />
+      <Stack.Screen name="BecasPopulares" component={BecasPopulares} options={{ title: "Becas populares" }} />
     </Stack.Navigator>
   )
 }

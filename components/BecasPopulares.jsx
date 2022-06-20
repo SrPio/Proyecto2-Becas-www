@@ -5,7 +5,7 @@ import { db } from "../database/firebase";
 import { ListItem, Avatar } from "react-native-elements";
 import { FAB } from "react-native-paper";
 
-function BecasList(props) {
+function BecasPopulares(props) {
   const [becas, setBecas] = useState([]);
 
   useEffect(() => {
@@ -27,8 +27,9 @@ function BecasList(props) {
           console.log(error, "Error en snapshot");
         }
       );
-      setBecas(becasData);
-      console.log(becasData);
+      let filtrada = becasData.filter((beca) => beca.popularidad >= 4);
+      setBecas(filtrada);
+      console.log(filtrada);
     });
 
     return () => {
@@ -73,14 +74,6 @@ function BecasList(props) {
         theme={{ colors: { accent: "#38b000" } }}
         onPress={() => props.navigation.navigate("CrearBecas")}
       />
-      <FAB
-        style={styles.fab2}
-        icon="plus"
-        small
-        label="Becas populares"
-        theme={{ colors: { accent: "#38b000" } }}
-        onPress={() => props.navigation.navigate("BecasPopulares")}
-      />
     </View>
   );
 }
@@ -93,13 +86,6 @@ const styles = StyleSheet.create({
     right: 0,
     top: "85%",
   },
-  fab2: {
-    position: "absolute",
-    margin: 16,
-    marginTop: 20,
-    right: 0,
-    top: "75%",
-  },
 });
 
-export default BecasList;
+export default BecasPopulares;
