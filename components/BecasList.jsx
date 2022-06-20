@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, Button } from "react-native";
 import { collection, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../database/firebase";
 import { ListItem, Avatar } from "react-native-elements";
+import { FAB } from "react-native-paper";
 
 function BecasList(props) {
   const [becas, setBecas] = useState([]);
@@ -36,39 +37,54 @@ function BecasList(props) {
   }, []);
 
   return (
-    <ScrollView>
-      <Text>BecasList</Text>
-      <Button
-        title="Crear Beca"
+    <View style={{ height: "100%" }}>
+      <ScrollView>
+        {becas?.map((beca) => {
+          return (
+            <ListItem
+              key={beca.id}
+              bottomDivider
+              onPress={() => {
+                props.navigation.navigate("BecasInfo", {
+                  becaId: beca.id,
+                });
+              }}
+            >
+              <ListItem.Chevron />
+              <Avatar
+                source={{
+                  uri: "https://www.primeprospects.net/wp-content/uploads/2017/10/education-icon-1.png",
+                }}
+                rounded
+              />
+              <ListItem.Content>
+                <ListItem.Title>{beca.nombre}</ListItem.Title>
+                <ListItem.Subtitle>{beca.categoria}</ListItem.Subtitle>
+              </ListItem.Content>
+            </ListItem>
+          );
+        })}
+      </ScrollView>
+      <FAB
+        style={styles.fab}
+        icon="plus"
+        small
+        label="Crear beca"
+        theme={{ colors: { accent: "#38b000" } }}
         onPress={() => props.navigation.navigate("CrearBecas")}
       />
-      {becas?.map((beca) => {
-        return (
-          <ListItem
-            key={beca.id}
-            bottomDivider
-            onPress={() => {
-              props.navigation.navigate("BecasInfo", {
-                becaId: beca.id,
-              });
-            }}
-          >
-            <ListItem.Chevron />
-            <Avatar
-              source={{
-                uri: "https://www.primeprospects.net/wp-content/uploads/2017/10/education-icon-1.png",
-              }}
-              rounded
-            />
-            <ListItem.Content>
-              <ListItem.Title>{beca.nombre}</ListItem.Title>
-              <ListItem.Subtitle>{beca.categoria}</ListItem.Subtitle>
-            </ListItem.Content>
-          </ListItem>
-        );
-      })}
-    </ScrollView>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  fab: {
+    position: "absolute",
+    margin: 16,
+    marginTop: 20,
+    right: 0,
+    top: "85%",
+  },
+});
 
 export default BecasList;

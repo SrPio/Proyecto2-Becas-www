@@ -75,7 +75,7 @@ function ActualizarBeca(props) {
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: "#fff" }}>
       <View style={styles.container}>
         <TextInput
           style={styles.inputStyle}
@@ -123,13 +123,14 @@ function ActualizarBeca(props) {
           value={beca.popularidad}
           onChangeText={(value) => handleInputChange("popularidad", value)}
         ></TextInput>
-        <Button
-          title="Guardar Beca"
-          color="#38b000"
-          onPress={() => {
-            actualizarBeca(props.route.params.becaId, beca);
-          }}
-        ></Button>
+        <View style={{ width: "100%" }}>
+          <Button
+            title="Actualizar Beca"
+            onPress={() => {
+              actualizarBeca(props.route.params.becaId, beca);
+            }}
+          ></Button>
+        </View>
       </View>
     </ScrollView>
   );

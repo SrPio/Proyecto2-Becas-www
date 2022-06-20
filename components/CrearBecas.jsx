@@ -50,9 +50,8 @@ function CrearBecas(props) {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: "#fff" }}>
       <View style={styles.container}>
-        <Text>CrearBecas</Text>
         <TextInput
           style={styles.inputStyle}
           placeholder="Nombre"
@@ -90,12 +89,15 @@ function CrearBecas(props) {
           placeholder="Popularidad"
           onChangeText={(value) => handleInputChange("popularidad", value)}
         ></TextInput>
-        <Button
-          title="Guardar Beca"
-          onPress={() => {
-            guardarBeca();
-          }}
-        ></Button>
+        <View style={{ width: "100%" }}>
+          <Button
+            title="Guardar Beca"
+            color="#38b000"
+            onPress={() => {
+              guardarBeca();
+            }}
+          ></Button>
+        </View>
       </View>
     </ScrollView>
   );
