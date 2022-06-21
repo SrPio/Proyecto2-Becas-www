@@ -10,6 +10,8 @@ import {
 import { TextInput } from "react-native-paper";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../database/firebase";
+import NumericInput from "react-native-numeric-input";
+import { RadioButton } from "react-native-paper";
 
 function ActualizarBeca(props) {
   console.log(props.route.params.becaId);
@@ -26,6 +28,7 @@ function ActualizarBeca(props) {
 
   const [beca, setBeca] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [checked, setChecked] = React.useState("Nacional");
 
   const handleInputChange = (name, value) => {
     setBeca({ ...beca, [name]: value });
@@ -36,6 +39,7 @@ function ActualizarBeca(props) {
     const docSnap = await getDoc(docRef);
     const becaData = docSnap.data();
     setBeca(becaData);
+    setChecked(becaData.categoria);
     console.log(becaData);
     setLoading(false);
   };
@@ -44,7 +48,7 @@ function ActualizarBeca(props) {
     try {
       await updateDoc(doc(db, "becas", id), {
         nombre: beca.nombre,
-        categoria: beca.categoria,
+        categoria: checked,
         porcentaje_financia: beca.porcentaje_financia,
         pais: beca.pais,
         universidad: beca.universidad,
@@ -82,29 +86,49 @@ function ActualizarBeca(props) {
           style={styles.inputStyle}
           placeholder="Nombre"
           value={beca.nombre}
+          activeOutlineColor="#38b000"
           onChangeText={(value) => handleInputChange("nombre", value)}
         ></TextInput>
-        <TextInput
-          mode="outlined"
-          style={styles.inputStyle}
-          placeholder="Categoria"
-          value={beca.categoria}
-          onChangeText={(value) => handleInputChange("categoria", value)}
-        ></TextInput>
-        <TextInput
-          mode="outlined"
-          style={styles.inputStyle}
-          placeholder="Porcentaje de Financiación"
-          value={beca.porcentaje_financia}
-          onChangeText={(value) =>
-            handleInputChange("porcentaje_financia", value)
-          }
-        ></TextInput>
+        <View style={{ marginBottom: 30, alignItems: "center" }}>
+          <Text style={{ marginBottom: 10, fontSize: 16 }}>Categoría</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text>Nacional</Text>
+            <RadioButton
+              color="#38b000"
+              value="Nacional"
+              status={checked === "Nacional" ? "checked" : "unchecked"}
+              onPress={() => setChecked("Nacional")}
+            />
+          </View>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text>Internacional</Text>
+            <RadioButton
+              color="#38b000"
+              value="Internacional"
+              status={checked === "Internacional" ? "checked" : "unchecked"}
+              onPress={() => setChecked("Internacional")}
+            />
+          </View>
+        </View>
+        <Text style={{ marginBottom: 10, fontSize: 16 }}>
+          Porcentaje de Financiación
+        </Text>
+        <NumericInput
+          containerStyle={{ marginBottom: 20 }}
+          rounded
+          minValue={0}
+          maxValue={100}
+          iconStyle={{ color: "white" }}
+          rightButtonBackgroundColor="#38b000"
+          leftButtonBackgroundColor="#38b000"
+          onChange={(value) => handleInputChange("porcentaje_financia", value)}
+        />
         <TextInput
           mode="outlined"
           style={styles.inputStyle}
           placeholder="Pais"
           value={beca.pais}
+          activeOutlineColor="#38b000"
           onChangeText={(value) => handleInputChange("pais", value)}
         ></TextInput>
         <TextInput
@@ -112,6 +136,7 @@ function ActualizarBeca(props) {
           style={styles.inputStyle}
           placeholder="Universidad"
           value={beca.universidad}
+          activeOutlineColor="#38b000"
           onChangeText={(value) => handleInputChange("universidad", value)}
         ></TextInput>
         <TextInput
@@ -121,15 +146,20 @@ function ActualizarBeca(props) {
           multiline
           numberOfLines={10}
           value={beca.requerimientos}
+          activeOutlineColor="#38b000"
           onChangeText={(value) => handleInputChange("requerimientos", value)}
         ></TextInput>
-        <TextInput
-          mode="outlined"
-          style={styles.inputStyle}
-          placeholder="Popularidad"
-          value={beca.popularidad}
-          onChangeText={(value) => handleInputChange("popularidad", value)}
-        ></TextInput>
+        <Text style={{ marginBottom: 10, fontSize: 16 }}>Popularidad</Text>
+        <NumericInput
+          containerStyle={{ marginBottom: 20 }}
+          rounded
+          minValue={0}
+          maxValue={5}
+          iconStyle={{ color: "white" }}
+          rightButtonBackgroundColor="#38b000"
+          leftButtonBackgroundColor="#38b000"
+          onChange={(value) => handleInputChange("popularidad", value)}
+        />
         <View style={{ width: "100%" }}>
           <Button
             title="Actualizar Beca"

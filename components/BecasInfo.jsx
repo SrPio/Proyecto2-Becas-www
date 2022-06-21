@@ -7,6 +7,7 @@ import {
   Button,
   ActivityIndicator,
   Alert,
+  ScrollView,
 } from "react-native";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../database/firebase";
@@ -103,9 +104,9 @@ function BecasInfo(props) {
           <View style={styles.viewStyle2}>
             <Text style={{ fontWeight: "bold" }}>Requerimientos: </Text>
           </View>
-          <View style={styles.viewStyle}>
-            <Text>{beca.requerimientos}</Text>
-          </View>
+          <ScrollView style={{ height: 70, marginBottom: 20, paddingLeft: 10 }}>
+            <Text style={{ height: 80 }}>{beca.requerimientos}</Text>
+          </ScrollView>
           <View style={styles.viewStyle}>
             {Array.from({ length: beca.popularidad }).map((item, index) => {
               return (
