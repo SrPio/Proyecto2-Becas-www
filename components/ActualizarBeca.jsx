@@ -5,9 +5,9 @@ import {
   View,
   Button,
   ScrollView,
-  TextInput,
   ActivityIndicator,
 } from "react-native";
+import { TextInput } from "react-native-paper";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../database/firebase";
 
@@ -78,18 +78,21 @@ function ActualizarBeca(props) {
     <ScrollView style={{ backgroundColor: "#fff" }}>
       <View style={styles.container}>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Nombre"
           value={beca.nombre}
           onChangeText={(value) => handleInputChange("nombre", value)}
         ></TextInput>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Categoria"
           value={beca.categoria}
           onChangeText={(value) => handleInputChange("categoria", value)}
         ></TextInput>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Porcentaje de Financiación"
           value={beca.porcentaje_financia}
@@ -98,18 +101,21 @@ function ActualizarBeca(props) {
           }
         ></TextInput>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Pais"
           value={beca.pais}
           onChangeText={(value) => handleInputChange("pais", value)}
         ></TextInput>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Universidad"
           value={beca.universidad}
           onChangeText={(value) => handleInputChange("universidad", value)}
         ></TextInput>
         <TextInput
+          mode="outlined"
           style={styles.inputAreaStyle}
           placeholder="Requerimientos"
           multiline
@@ -118,6 +124,7 @@ function ActualizarBeca(props) {
           onChangeText={(value) => handleInputChange("requerimientos", value)}
         ></TextInput>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Popularidad"
           value={beca.popularidad}
@@ -148,19 +155,14 @@ const styles = StyleSheet.create({
     fontSize: 50,
   },
   inputStyle: {
-    borderColor: "gray",
     width: "100%",
-    borderWidth: 1,
-    borderRadius: 10,
+    height: 40,
     padding: 10,
     marginBottom: 20,
   },
   inputAreaStyle: {
-    borderColor: "gray",
     width: "100%",
     height: 140,
-    borderWidth: 1,
-    borderRadius: 10,
     padding: 10,
     marginBottom: 20,
   },

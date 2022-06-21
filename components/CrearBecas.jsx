@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TextInput,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, View, ScrollView, Button } from "react-native";
+import { TextInput } from "react-native-paper";
 import { db } from "../database/firebase";
 import { collection, addDoc } from "firebase/firestore";
 
@@ -53,16 +47,19 @@ function CrearBecas(props) {
     <ScrollView style={{ backgroundColor: "#fff" }}>
       <View style={styles.container}>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Nombre"
           onChangeText={(value) => handleInputChange("nombre", value)}
         ></TextInput>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Categoria"
           onChangeText={(value) => handleInputChange("categoria", value)}
         ></TextInput>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Porcentaje de Financiación"
           onChangeText={(value) =>
@@ -70,21 +67,25 @@ function CrearBecas(props) {
           }
         ></TextInput>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Pais"
           onChangeText={(value) => handleInputChange("pais", value)}
         ></TextInput>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Universidad"
           onChangeText={(value) => handleInputChange("universidad", value)}
         ></TextInput>
         <TextInput
-          style={styles.inputStyle}
+          mode="outlined"
+          style={styles.inputAreaStyle}
           placeholder="Requerimientos"
           onChangeText={(value) => handleInputChange("requerimientos", value)}
         ></TextInput>
         <TextInput
+          mode="outlined"
           style={styles.inputStyle}
           placeholder="Popularidad"
           onChangeText={(value) => handleInputChange("popularidad", value)}
@@ -115,10 +116,14 @@ const styles = StyleSheet.create({
     fontSize: 50,
   },
   inputStyle: {
-    borderColor: "gray",
     width: "100%",
-    borderWidth: 1,
-    borderRadius: 10,
+    height: 40,
+    padding: 10,
+    marginBottom: 20,
+  },
+  inputAreaStyle: {
+    width: "100%",
+    height: 140,
     padding: 10,
     marginBottom: 20,
   },
