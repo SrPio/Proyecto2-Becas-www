@@ -13,6 +13,8 @@ import { db } from "../database/firebase";
 import { Card } from "react-native-elements";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons/faLocationDot";
+import { faBuildingColumns } from "@fortawesome/free-solid-svg-icons/faBuildingColumns";
+import { faSackDollar } from "@fortawesome/free-solid-svg-icons/faSackDollar";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 function BecasInfo(props) {
@@ -75,20 +77,35 @@ function BecasInfo(props) {
         <Card.Divider />
         <View>
           <Image
-            style={{ width: "100%", height: 200 }}
+            style={{ width: "100%", height: 200, marginBottom: 20 }}
             resizeMode="cover"
             source={{
               uri: "https://img.freepik.com/vector-gratis/cartel-prestamos-estudiantiles-o-becas_603843-1091.jpg?t=st=1652638503~exp=1652639103~hmac=b4369561279465254bff66e851f64a607447abc227ca811563c2f34019fef67e&w=740",
             }}
           />
-          <Text>{beca.categoria}</Text>
+          <View style={styles.viewStyle}>
+            <Text style={styles.header}>{beca.categoria}</Text>
+          </View>
           <View style={styles.viewStyle}>
             <FontAwesomeIcon icon={faLocationDot} />
-            <Text>{beca.pais}</Text>
+            <Text style={styles.body}>{beca.pais}</Text>
           </View>
-          <Text>{beca.porcentaje_financia}</Text>
-          <Text>{beca.universidad}</Text>
-          <Text>{beca.requerimientos}</Text>
+          <View style={styles.viewStyle}>
+            <FontAwesomeIcon icon={faBuildingColumns} />
+            <Text style={styles.body}>{beca.universidad}</Text>
+          </View>
+          <View style={styles.viewStyle}>
+            <FontAwesomeIcon icon={faSackDollar} />
+            <Text style={styles.body}>
+              Porcentaje de financiacion: {beca.porcentaje_financia}%
+            </Text>
+          </View>
+          <View style={styles.viewStyle2}>
+            <Text style={{ fontWeight: "bold" }}>Requerimientos: </Text>
+          </View>
+          <View style={styles.viewStyle}>
+            <Text>{beca.requerimientos}</Text>
+          </View>
           <View style={styles.viewStyle}>
             {Array.from({ length: beca.popularidad }).map((item, index) => {
               return (
@@ -141,6 +158,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     marginBottom: 30,
+    paddingLeft: 10,
+  },
+  viewStyle2: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginTop: 10,
+    marginBottom: 20,
+    paddingLeft: 10,
   },
   starOpaca: {
     color: "#bdbdbd",
@@ -150,6 +176,16 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     marginBottom: 20,
+  },
+  header: {
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  body: {
+    color: "#222",
+    fontSize: 15,
+    paddingLeft: 5,
+    paddingRight: 20,
   },
 });
 

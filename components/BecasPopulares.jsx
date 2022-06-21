@@ -4,6 +4,9 @@ import { collection, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../database/firebase";
 import { ListItem, Avatar } from "react-native-elements";
 import { FAB } from "react-native-paper";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons/faLocationDot";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 function BecasPopulares(props) {
   const [becas, setBecas] = useState([]);
@@ -62,6 +65,28 @@ function BecasPopulares(props) {
                 <ListItem.Title>{beca.nombre}</ListItem.Title>
                 <ListItem.Subtitle>{beca.categoria}</ListItem.Subtitle>
               </ListItem.Content>
+              <View style={styles.viewStyle}>
+                {Array.from({ length: beca.popularidad }).map((item, index) => {
+                  return (
+                    <FontAwesomeIcon
+                      key={index}
+                      style={styles.star}
+                      icon={faStar}
+                    />
+                  );
+                })}
+                {Array.from({ length: 5 - beca.popularidad }).map(
+                  (item, index) => {
+                    return (
+                      <FontAwesomeIcon
+                        key={index}
+                        style={styles.starOpaca}
+                        icon={faStar}
+                      />
+                    );
+                  }
+                )}
+              </View>
             </ListItem>
           );
         })}
@@ -85,6 +110,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
     right: 0,
     top: "85%",
+  },
+  viewStyle: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  starOpaca: {
+    color: "#bdbdbd",
+  },
+  star: {
+    color: "#ffc300",
   },
 });
 
