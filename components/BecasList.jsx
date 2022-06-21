@@ -4,6 +4,7 @@ import { collection, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../database/firebase";
 import { ListItem, Avatar } from "react-native-elements";
 import { FAB } from "react-native-paper";
+import CarouselNYT from "./CarouselComponent/CarouselNYT";
 
 function BecasList(props) {
   const [becas, setBecas] = useState([]);
@@ -39,6 +40,7 @@ function BecasList(props) {
   return (
     <View style={{ height: "100%" }}>
       <ScrollView>
+        <CarouselNYT />
         {becas?.map((beca) => {
           return (
             <ListItem
