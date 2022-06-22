@@ -4,7 +4,7 @@ import { TextInput } from "react-native-paper";
 import { db } from "../database/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import NumericInput from "react-native-numeric-input";
-import { RadioButton } from "react-native-paper";
+import { RadioButton, FAB } from "react-native-paper";
 
 function CrearBecas(props) {
   const INITIAL_STATE = {
@@ -126,13 +126,16 @@ function CrearBecas(props) {
           onChange={(value) => handleInputChange("popularidad", value)}
         />
         <View style={{ width: "100%" }}>
-          <Button
-            title="Guardar Beca"
-            color="#38b000"
+          <FAB
+            style={styles.fab2}
+            icon="check"
+            small
+            label="Guardar Beca"
+            theme={{ colors: { accent: "#38b000" } }}
             onPress={() => {
               guardarBeca();
             }}
-          ></Button>
+          />
         </View>
       </View>
     </ScrollView>

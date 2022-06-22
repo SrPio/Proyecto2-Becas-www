@@ -17,6 +17,7 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons/faLocationDot";
 import { faBuildingColumns } from "@fortawesome/free-solid-svg-icons/faBuildingColumns";
 import { faSackDollar } from "@fortawesome/free-solid-svg-icons/faSackDollar";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FAB } from "react-native-paper";
 
 function BecasInfo(props) {
   console.log(props.route.params.becaId);
@@ -72,7 +73,7 @@ function BecasInfo(props) {
   }
 
   return (
-    <View>
+    <ScrollView>
       <Card>
         <Card.Title>{beca.nombre}</Card.Title>
         <Card.Divider />
@@ -107,13 +108,14 @@ function BecasInfo(props) {
           <ScrollView style={{ height: 70, marginBottom: 20, paddingLeft: 10 }}>
             <Text style={{ height: 80 }}>{beca.requerimientos}</Text>
           </ScrollView>
-          <View style={styles.viewStyle}>
+          <View style={styles.viewStyle3}>
             {Array.from({ length: beca.popularidad }).map((item, index) => {
               return (
                 <FontAwesomeIcon
                   key={index}
                   style={styles.star}
                   icon={faStar}
+                  size={28}
                 />
               );
             })}
@@ -123,33 +125,40 @@ function BecasInfo(props) {
                   key={index}
                   style={styles.starOpaca}
                   icon={faStar}
+                  size={28}
                 />
               );
             })}
           </View>
         </View>
         <View style={styles.buttonStyle}>
-          <Button
-            title="Editar Beca"
+          <FAB
+            style={styles.fab2}
+            icon="pencil"
+            small
+            label="Editar Beca"
+            theme={{ colors: { accent: "#005CE6" } }}
             onPress={() =>
               props.navigation.navigate("ActualizarBeca", {
                 becaId: props.route.params.becaId,
               })
             }
-          ></Button>
+          />
         </View>
         <View>
-          <Button
-            style={styles.buttonStyle}
-            title="Eliminar Beca"
-            color="#e63946"
+          <FAB
+            style={styles.fab2}
+            icon="delete"
+            small
+            label="Eliminar Beca"
+            theme={{ colors: { accent: "#e63946" } }}
             onPress={() => {
               confirmacionEliminar();
             }}
-          ></Button>
+          />
         </View>
       </Card>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -158,7 +167,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
-    marginBottom: 30,
+    marginBottom: 10,
     paddingLeft: 10,
   },
   viewStyle2: {
@@ -168,6 +177,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     paddingLeft: 10,
+  },
+  viewStyle3: {
+    flex: 1,
+    justifyContent: "center",
+    flexDirection: "row",
+    marginBottom: 30,
   },
   starOpaca: {
     color: "#bdbdbd",

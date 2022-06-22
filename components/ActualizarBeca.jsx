@@ -11,7 +11,7 @@ import { TextInput } from "react-native-paper";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../database/firebase";
 import NumericInput from "react-native-numeric-input";
-import { RadioButton } from "react-native-paper";
+import { RadioButton, FAB } from "react-native-paper";
 
 function ActualizarBeca(props) {
   console.log(props.route.params.becaId);
@@ -161,12 +161,16 @@ function ActualizarBeca(props) {
           onChange={(value) => handleInputChange("popularidad", value)}
         />
         <View style={{ width: "100%" }}>
-          <Button
-            title="Actualizar Beca"
+          <FAB
+            style={styles.fab2}
+            icon="check"
+            small
+            label="Actualizar Beca"
+            theme={{ colors: { accent: "#005CE6" } }}
             onPress={() => {
               actualizarBeca(props.route.params.becaId, beca);
             }}
-          ></Button>
+          />
         </View>
       </View>
     </ScrollView>
